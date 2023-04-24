@@ -4,56 +4,45 @@ import {Button} from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 import {useSelector} from 'react-redux';
 
-const Balance = ({navigation}) => {
-  const {transactions} = useSelector((state) => state.transactions);
+const Card = ({navigation}) => {
 
-  const prices = transactions.map((transaction) => transaction.price);
-  const totalPrice = prices.reduce((prev, cur) => (prev += cur), 0).toFixed(2);
+    const {transactions} = useSelector((state) => state.transactions)
 
-  const expense =
-    prices
-      .filter((price) => price < 0)
-      .reduce((prev, cur) => (prev += cur), 0)
-      .toFixed(2) * -1;
+    const prices = transactions.map((transaction) => transaction.price);
+    const totalPrice = prices.reduce((prev, cur) => (prev += cur),0);
+
+    const expense = prices.filter(price => price < 0)
+        .reduce((prev, cur) => (prev += cur),0)* -1;
 
   return (
     <LinearGradient
       colors={['#FAAD3D', '#EFC90A', '#F1CB0C']}
-      style={styles.Box}>
-      <View 
-      style={{width: '70%', alignItems: 'flex-start'}}
-      >
+      style={{...styles.Box}}>
+      <View style={{width: '70%', alignItems: 'flex-start'}}>
         <Text
           style={{
             fontSize: 15,
             color: '#fff',
-            fontFamily: 'Lato-Regular',
-            fontWeight: '700',
-          }}
-          >
-          Income
+            fontWeight: '600',
+          }}>
+          Current Balance
         </Text>
         <Text
           style={{
-            fontFamily: 'Lato-Medium',
             fontSize: 32,
             color: '#fff',
             fontWeight: '700',
-          }}
-          >
-          ₦{totalPrice}
+          }}>
+          ₹ {totalPrice}
         </Text>
-
         <Text
           style={{
             marginTop: 67,
             color: '#fff',
-            fontFamily: 'Lato-Regular',
             fontSize: 18,
             fontWeight: '700',
-          }}
-          >
-          4234 **** **** 6533
+          }}>
+          3727 **** **** 4596
         </Text>
       </View>
 
@@ -61,19 +50,17 @@ const Balance = ({navigation}) => {
         style={{
           alignItems: 'flex-end',
           width: '30%',
-        }}
-        >
-        <Text 
-        style={{fontSize: 18, color: '#fff', fontWeight: '700'}}
-        >
-          NGN
+        }}>
+        <Text style={{fontSize: 18, color: '#fff', fontWeight: '700'}}>
+          INR
         </Text>
         <View style={{flex: 1}}>
           <Button
-            rounded
             light
             style={{
-              padding: 10,
+              width: '90%',
+              borderRadius: 20,
+              padding: 15,
               marginTop: 32,
               borderWidth: 3,
               borderColor: '#fff',
@@ -84,9 +71,14 @@ const Balance = ({navigation}) => {
             onPress={() => {
               navigation.navigate('Add');
             }}>
-            <Text 
-            style={{color: '#fff', fontWeight: '700', fontSize: 15}}
-            >
+            <Text
+              style={{
+                color: '#fff',
+                fontWeight: '700',
+                fontSize: 15,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
               Add
             </Text>
           </Button>
@@ -97,18 +89,18 @@ const Balance = ({navigation}) => {
               color: '#fff',
               fontSize: 15,
               fontWeight: '700',
-            }}
-            >
-              Expense
+              bottom: 10,
+            }}>
+            Expense
           </Text>
           <Text
             style={{
               color: '#fff',
               fontSize: 18,
               fontWeight: '700',
-            }}
-            >
-            -₦{expense}
+              bottom: 10,
+            }}>
+            ₹{expense}
           </Text>
         </View>
       </View>
@@ -126,4 +118,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Balance;
+export default Card;

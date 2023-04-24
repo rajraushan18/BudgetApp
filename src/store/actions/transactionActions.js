@@ -1,7 +1,9 @@
 import {ADD_TRANSACTION, DELETE_TRANSACTION} from './types';
 
 export const addTransaction = ({id, title, price}) => (dispatch) => {
-  const newTransaction = {
+console.log(id, title, price);
+
+      const newTransaction = {
     id, 
     title,
     price,
